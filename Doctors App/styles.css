@@ -1,6 +1,6 @@
 /* Custom Doctor-Friendly Styles */
 body {
-    background-image: url('https://plus.unsplash.com/premium_photo-1661775601929-8c775187bea6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZG9jdG9yJTIwcGF0aWVudHxlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000');
+    background-image: url('https://burst.shopifycdn.com/photos/doctors-office-flatlay.jpg?width=1000&format=pjpg&exif=0&iptc=0');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -124,9 +124,11 @@ select {
     margin-right: 115px;
     border: outset;
 }
+
 button.btn.btn-sm.btn-danger {
     background-color: #f4f2f7 !important;
 }
+
 /* --------------------------------------------------- */
 
 /* Print styles - ensures only the doc content prints when using the specialized print function */
@@ -143,5 +145,4 @@ button.btn.btn-sm.btn-danger {
     background-color: #0d6efd;
     border-color: #0d6efd;
     margin-top: 11px;
-
 }
