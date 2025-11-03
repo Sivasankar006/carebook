@@ -2,133 +2,162 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Patient Records </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Patient Records </title>
 
-  <link rel="icon" type="image/x-icon" href="https://www.samarpaninfotech.com/wp-content/uploads/2019/02/welcome_ehr_img.png">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="https://www.samarpaninfotech.com/wp-content/uploads/2019/02/welcome_ehr_img.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <div class="container mt-5 mb-5">
-    <div class="header-bg d-flex justify-content-between align-items-center mb-4">
-      <h2 class="text-white mb-0">Patient Records </h2>
-      <div class="d-flex gap-2">
-        <button class="btn btn-success" id="btnBackup" onclick="backupData()">
-          ⬇️ Backup/Export
-        </button>
-        <label for="fileInput" class="btn btn-warning text-dark mb-0" id="btnRestoreLabel">
-          ⬆️ Restore/Import
-        </label>
-        <input type="file" id="fileInput" accept=".json" class="d-none" onchange="restoreData(event)">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4 mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input id="name" type="text" class="form-control" />
-      </div>
-      <div class="col-md-4 mb-3">
-        <label for="father" class="form-label">Father Name</label>
-        <input id="father" type="text" class="form-control" />
-      </div>
-      <div class="col-md-4 mb-3">
-        <label for="mobile" class="form-label">Mobile</label>
-        <input id="mobile" type="text" class="form-control" placeholder="Enter mobile number" />
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="visitRowWrapper d-none" id="visitRowWrapper">
-      <div class="visitRow">
-        <label for="visitSelect" class="form-label mb-0">View Previous Visits:</label>
-        <select id="visitSelect" class="form-select"></select>
-
-        <label for="startDate" class="form-label mb-0">Start:</label>
-        <input type="date" id="startDate" class="form-control" onchange="applyDateFilter()" />
-
-        <label for="endDate" class="form-label mb-0">End:</label>
-        <input type="date" id="endDate" class="form-control" onchange="applyDateFilter()" />
-
-        <button class="btn btn-secondary" onclick="clearFilters()">🧹 Clear Filters</button>
-      </div>
-    </div>
-
-    <div class="actionRow" id="mainActionRow">
-      <button class="btn btn-primary d-none" id="btnNewRecord" onclick="newRecord()">➕ New Visit</button>
-      <button class="btn btn-secondary" onclick="clearForm()">🧹 Clear Form (New Patient)</button>
-    </div>
-
-    <div id="noRecordsMsg" class="alert alert-info d-none" role="alert"></div>
-
-    <hr>
-
-    <div id="detailsSection">
-      <div class="row">
-        <div class="col-md-3 mb-3">
-          <label for="age" class="form-label">Age</label>
-          <input id="age" type="number" class="form-control" />
+    <div class="container mt-5 mb-5">
+        <div class="header-bg d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-white mb-0">Patient Records </h2>
+            <div class="d-flex gap-2">
+                <button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#doctorModal">
+                    🩺 Manage Doctor
+                </button>
+                <button class="btn btn-success" id="btnBackup" onclick="backupData()">
+                    ⬇️ Backup/Export
+                </button>
+                <label for="fileInput" class="btn btn-warning text-dark mb-0" id="btnRestoreLabel">
+                    ⬆️ Restore/Import
+                </label>
+                <input type="file" id="fileInput" accept=".json" class="d-none" onchange="restoreData(event)">
+            </div>
         </div>
-        <div class="col-md-3 mb-3">
-          <label for="date" class="form-label">Date</label>
-          <input id="date" type="date" class="form-control" />
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input id="name" type="text" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="father" class="form-label">Father Name</label>
+                <input id="father" type="text" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="mobile" class="form-label">Mobile</label>
+                <input id="mobile" type="text" class="form-control" placeholder="Enter mobile number" />
+            </div>
         </div>
-        <div class="col-md-6 mb-3">
-          <label for="address" class="form-label">Address</label>
-          <input id="address" type="text" class="form-control" />
+
+        <hr>
+        <div class="visitRowWrapper d-none" id="visitRowWrapper">
+            <div class="visitRow">
+                <label for="visitSelect" class="form-label mb-0">View Previous Visits:</label>
+                <select id="visitSelect" class="form-select"></select>
+
+                <label for="startDate" class="form-label mb-0">Start:</label>
+                <input type="date" id="startDate" class="form-control" onchange="applyDateFilter()" />
+
+                <label for="endDate" class="form-label mb-0">End:</label>
+                <input type="date" id="endDate" class="form-control" onchange="applyDateFilter()" />
+
+                <button class="btn btn-secondary" onclick="clearFilters()">🧹 Clear Filters</button>
+            </div>
         </div>
-      </div>
-      <div class="mb-3">
-        <label for="problem" class="form-label">Problem/Diagnosis</label>
-        <textarea id="problem" rows="3" class="form-control"></textarea>
-      </div>
+
+        <div class="actionRow" id="mainActionRow">
+            <button class="btn btn-primary d-none" id="btnNewRecord" onclick="newRecord()">➕ New Visit</button>
+            <button class="btn btn-secondary" onclick="clearForm()">🧹 Clear Form (New Patient)</button>
+        </div>
+
+        <div id="noRecordsMsg" class="alert alert-info d-none" role="alert"></div>
+
+        <hr>
+
+        <div id="detailsSection">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input id="age" type="number" class="form-control" />
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input id="date" type="date" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <input id="address" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="problem" class="form-label">Problem/Diagnosis</label>
+                <textarea id="problem" rows="3" class="form-control"></textarea>
+            </div>
 
 
-      <h3 class="mt-4 mb-3 text-primary">Prescription</h3>
-      <div class="table-responsive">
-        <table class="table table-bordered" id="presTable">
-          <thead>
-            <tr>
-              <th style="width: 30%;">Medicine</th>
-              <th style="width: 15%;">Quantity/Days</th>
-              <th style="width: 10%;">Morning</th>
-              <th style="width: 10%;">Afternoon</th>
-              <th style="width: 10%;">Evening</th>
-              <th style="width: 10%;">Night</th>
-              <th style="width: 10%;">Action</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <button class="btn btn-success mb-4" onclick="addMedicineRow()">+ Add Medicine</button>
+            <h3 class="mt-4 mb-3 text-primary">Prescription</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="presTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Medicine</th>
+                            <th style="width: 15%;">Quantity/Days</th>
+                            <th style="width: 10%;">Morning</th>
+                            <th style="width: 10%;">Afternoon</th>
+                            <th style="width: 10%;">Evening</th>
+                            <th style="width: 10%;">Night</th>
+                            <th style="width: 10%;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <button class="btn btn-success mb-4" onclick="addMedicineRow()">+ Add Medicine</button>
 
-      <div class="d-flex gap-3 justify-content-start">
-        <button class="btn btn-primary" id="btnSaveUpdate" onclick="saveVisit()">💾 Save Visit</button>
-        <button class="btn btn-danger" id="btnDownloadDoc" onclick="downloadCurrentRecord()">
-          ⬇️ Download .DOC
-        </button>
-        <button class="btn btn-info text-white" id="btnPrint" onclick="printCurrentRecord()">
-          🖨️ Print Prescription
-        </button>
-      </div>
+            <div class="d-flex gap-3 justify-content-start">
+                <button class="btn btn-primary" id="btnSaveUpdate" onclick="saveVisit()">💾 Save Visit</button>
+                <button class="btn btn-danger" id="btnDownloadDoc" onclick="downloadCurrentRecord()">
+                    ⬇️ Download .DOC
+                </button>
+                <button class="btn btn-info text-white" id="btnPrint" onclick="printCurrentRecord()">
+                    🖨️ Print Prescription
+                </button>
+            </div>
 
+        </div>
+
+        <div id="msg" class="mt-3"></div>
     </div>
 
-    <div id="msg" class="mt-3"></div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
-  <script src="script.js"></script>
+    <div class="modal fade" id="doctorModal" tabindex="-1" aria-labelledby="doctorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="doctorModalLabel">🩺 Update Doctor Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="docName" class="form-label">Full Name & Title (e.g., Dr. SIVASANKAR MBBS)</label>
+                        <input type="text" class="form-control" id="docName" placeholder="Dr. John Doe, MD">
+                    </div>
+                    <div class="mb-3">
+                        <label for="docSubtitle" class="form-label">Subtitle (e.g., Physician, Reg. No: XXXXX)</label>
+                        <input type="text" class="form-control" id="docSubtitle" placeholder="General Medicine, Reg. No: 12345">
+                    </div>
+                    <div class="mb-3">
+                        <label for="docContact" class="form-label">Contact/Address (e.g., 123 Main St | Phone: (123)...)</label>
+                        <textarea class="form-control" id="docContact" rows="2" placeholder="123 Main Street, City, State | Phone: (123) 456-7890"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="saveDoctorDetails()">💾 Save Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+    <script src="script.js"></script>
 </body>
-
 
 </html>
