@@ -124,7 +124,9 @@ select {
     margin-right: 115px;
     border: outset;
 }
-
+button.btn.btn-sm.btn-danger {
+    background-color: #f4f2f7 !important;
+}
 /* --------------------------------------------------- */
 
 /* Print styles - ensures only the doc content prints when using the specialized print function */
@@ -141,4 +143,5 @@ select {
     background-color: #0d6efd;
     border-color: #0d6efd;
     margin-top: 11px;
+
 }
