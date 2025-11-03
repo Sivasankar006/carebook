@@ -1,0 +1,144 @@
+/* Custom Doctor-Friendly Styles */
+body {
+    background-image: url('https://plus.unsplash.com/premium_photo-1661775601929-8c775187bea6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZG9jdG9yJTIwcGF0aWVudHxlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #f7f9fc;
+    /* REMOVE THE FILTER from the body */
+    filter: none;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header-bg {
+    background-color: #007bff;
+    /* Primary clinic blue */
+    color: white;
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
+    margin: -30px -30px 20px -30px;
+    /* Extend background to edges */
+}
+
+.form-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.table thead th {
+    background-color: #e9ecef;
+    /* Light gray table header */
+    color: #343a40;
+    font-weight: 700;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+}
+
+/* Adjusting form controls for Bootstrap look */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+    border-radius: .25rem;
+}
+
+/* Action Row alignment adjustments */
+.actionRow,
+.visitRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.visitRow select,
+.visitRow input[type="date"] {
+    max-width: 250px;
+}
+
+/* --- NEW STYLES FOR COLLAPSING INPUT FIELDS --- */
+.dosage-cell {
+    /* CRITICAL: Allows absolute positioning of the input within the cell */
+    position: relative;
+    padding: 0.5rem 0.25rem;
+    /* Reduced padding for compact look */
+    text-align: center;
+}
+
+.dosage-input {
+    /* CRITICAL: Makes it float above other elements and expand within the cell */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Center it vertically and horizontally */
+    font-size: 0.85rem;
+    padding: 0.2rem;
+    width: 90px;
+    /* Width when visible */
+    z-index: 10;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #007bff;
+    /* Highlight border when active */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    /* Ensure it covers the checkbox */
+}
+
+/* The class to hide/collapse the input field */
+.hidden-input {
+    width: 1px !important;
+    /* Make width minimal */
+    height: 1px !important;
+    /* Make height minimal */
+    padding: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+    /* Make it unclickable when hidden */
+    transform: translate(-50%, -50%) scale(0);
+    /* Shrink animation */
+}
+
+/* Ensure the checkbox itself is still visible and clickable */
+.dosage-cell .form-check-input {
+    position: relative;
+    z-index: 11;
+    cursor: pointer;
+    margin-right: 115px;
+    border: outset;
+}
+
+/* --------------------------------------------------- */
+
+/* Print styles - ensures only the doc content prints when using the specialized print function */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        background-color: white;
+    }
+}
+
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    margin-top: 11px;
+}
